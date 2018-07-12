@@ -1,10 +1,16 @@
 // JavaScript Document
 
+// Define Constants
+
+// Define Variables
+let moves = 0;
+let stars = 3;
+
 // TODO: Create a list that holds all of your cards, (and access with event listener?)
 
 // TODO: Display the cards on the page
-
   // TODO: Shuffle the list of cards using the provided "shuffle" method below
+  // listen for fa-repeat click, call shuffle()
   // TODO: loop through each card and create its HTML
   // TODO: add each card's HTML to the page
 
@@ -36,3 +42,7 @@ function shuffle(array) {
 // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 
 // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+
+// TODO: Increment moves
+
+// TODO: Decrement Stars
