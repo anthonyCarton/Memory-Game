@@ -1,8 +1,10 @@
 // JavaScript Document
+const deck = document.querySelector(".deck");
+const card = deck.querySelectorAll("li");
+
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(){
-  // Define Constants
-
+  console.log('Run on DOMContentLoaded');
   // Define Variables
   let moves = 0;
   let stars = 3;
@@ -29,19 +31,50 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   // TODO: set up the event listener for a card.
-
+  deck.addEventListener("click", function(event) {
+    displaySymbol(event);
+    openCards(event);
+  });
 
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
+  function displaySymbol(event){
+    console.log('card is clicked');
+    event.target.style.backgroundColor="black";
+  }
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+  function openCards(event){
+    console.log('this card is on the list');
+    // add card to open list
+  }
 
   // TODO: If the list already has another card, check to see if the two cards match
+  function cardCompare(){
+    /*if () {
+      cardsMatch();
+      counter();
+    } else {
+      cardsDontMatch();
+      starMinus();
+      counter();
+    }*/
+  }
 
   // TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+  function cardsMatch(){
+
+  }
 
   // TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+  function cardsDontMatch(){
+
+  }
 
   // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
+  function counter(){
+    moves++;
+    // update new moves count
+  }
 
   // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 
@@ -49,11 +82,12 @@ document.addEventListener('DOMContentLoaded', function(){
     // On first card click, start Timer
     // On game win, stop Timer
 
-  // TODO: Increment moves
-    // Call move incrememnt function at end of move function
-
   // TODO: Decrement Stars
-    // Call start decrement on not match case.
+    // Call star decrement on not match case.
+  function starMinus(){
+    stars--;
+    // update stars
+  }
 
 
   // The End
