@@ -73,6 +73,10 @@ document.addEventListener('DOMContentLoaded', function(){
 
   }
 
+  function clearCards (){
+    // turn cards back after some time
+  }
+
   // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
   function counter(){
     moves++;
