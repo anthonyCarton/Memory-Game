@@ -43,6 +43,8 @@ function shuffle(array) {
 
 // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 
+// TODO: Timer
+
 // TODO: Increment moves
 
 // TODO: Decrement Stars
