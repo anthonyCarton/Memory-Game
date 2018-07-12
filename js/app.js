@@ -39,7 +39,10 @@ document.addEventListener('DOMContentLoaded', function(){
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
     console.log('card is clicked');
-    event.target.style.backgroundColor="black";
+    // event.target.style.backgroundColor="black";
+    // event.target.toggleAttribute("class[open]");
+    event.target.classList.toggle("open");
+    event.target.classList.toggle("show");
   }
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
@@ -62,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
   function cardsMatch(){
-
+    // element.matches(selectorString)
   }
 
   // TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
