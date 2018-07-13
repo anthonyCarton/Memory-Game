@@ -32,22 +32,18 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function newGame() {
-    // toggle all .match
-    // toggle all .open
-    // toggle all .show
-    // shuffle(deck);
+    // TODO: toggle all .match
+    // TODO: toggle all .open
+    // TODO: toggle all .show
+    // TODO: shuffle(deck);
     stars = 3;
     moves = 0;
     console.log('newGame called');
   }
 
-
-
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
     console.log('card is clicked');
-    // event.target.style.backgroundColor="black";
-    // event.target.toggleAttribute("class[open]");
     event.target.classList.toggle("open");
     event.target.classList.toggle("show");
   }
