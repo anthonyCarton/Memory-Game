@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
-  function displaySymbol(event){
+  function cardFlip(event){
     console.log('card is clicked');
     event.target.classList.toggle("open");
     event.target.classList.toggle("show");
@@ -113,8 +113,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   // On Click, display symbol and open cards
   DECK.addEventListener("click", function(event) {
-    displaySymbol(event);
-    openCards(event);
+    cardFlip(event);
+    // openCards(event);
   });
 
 
