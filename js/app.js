@@ -5,18 +5,24 @@ const card = deck.querySelectorAll("li");
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(){
   console.log('Run on DOMContentLoaded');
-  // Define Variables
+  // VARIABLES
   let moves = 0;
   let stars = 3;
 
-  // TODO: Create a list that holds all of your cards, (and access with event listener?)
+  // EVENT LISTENERS
+  deck.addEventListener("click", function(event) {
+    displaySymbol(event);
+    openCards(event);
+  });
 
+  // TODO: Create a list that holds all of your cards, (and access with event listener?)
   // TODO: Display the cards on the page
     // TODO: Shuffle the list of cards using the provided "shuffle" method below
     // listen for fa-repeat click, call shuffle()
     // TODO: loop through each card and create its HTML
     // TODO: add each card's HTML to the page
 
+  // FUNCTIONS
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
       var currentIndex = array.length, temporaryValue, randomIndex;
@@ -30,11 +36,9 @@ document.addEventListener('DOMContentLoaded', function(){
       return array;
   }
 
-  // TODO: set up the event listener for a card.
-  deck.addEventListener("click", function(event) {
-    displaySymbol(event);
-    openCards(event);
-  });
+
+
+
 
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
@@ -96,6 +100,9 @@ document.addEventListener('DOMContentLoaded', function(){
     // update stars
   }
 
+  // FUNCTION CALLS
+  // On page load, shuffle the deck.
+  // shuffle(deck);
 
   // The End
 });
