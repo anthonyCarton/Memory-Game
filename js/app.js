@@ -1,6 +1,7 @@
 // JavaScript Document
 const deck = document.querySelector(".deck");
 const card = deck.querySelectorAll("li");
+const reset = document.querySelector(".fa-repeat");
 
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(){
@@ -8,12 +9,6 @@ document.addEventListener('DOMContentLoaded', function(){
   // VARIABLES
   let moves = 0;
   let stars = 3;
-
-  // EVENT LISTENERS
-  deck.addEventListener("click", function(event) {
-    displaySymbol(event);
-    openCards(event);
-  });
 
   // TODO: Create a list that holds all of your cards, (and access with event listener?)
   // TODO: Display the cards on the page
@@ -36,7 +31,15 @@ document.addEventListener('DOMContentLoaded', function(){
       return array;
   }
 
-
+  function newGame() {
+    // toggle all .match
+    // toggle all .open
+    // toggle all .show
+    // shuffle(deck);
+    stars = 3;
+    moves = 0;
+    console.log('newGame called');
+  }
 
 
 
@@ -100,9 +103,25 @@ document.addEventListener('DOMContentLoaded', function(){
     // update stars
   }
 
-  // FUNCTION CALLS
+  // EVENT LISTENERS & FUNCTION CALLS
   // On page load, shuffle the deck.
   // shuffle(deck);
+
+  // On reset, shuffle cards, reset stars ...
+  reset.addEventListener("click", function(event) {
+    console.log('reset clicked')
+    newGame();
+  });
+
+  // On lose, call newGame
+
+  // On Click, display symbol and open cards
+  deck.addEventListener("click", function(event) {
+    displaySymbol(event);
+    openCards(event);
+  });
+
+
 
   // The End
 });
