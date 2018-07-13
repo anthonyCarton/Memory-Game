@@ -1,10 +1,10 @@
 // JavaScript Document
-const deck = document.querySelector(".deck");
-const card = deck.querySelectorAll("li");
-const reset = document.querySelector(".fa-repeat");
+const DECK = document.querySelector(".deck"); // TODO: shuffle needs this to be an array, not a nodeList...
+const CARDS = DECK.querySelectorAll('li');
+const RESET = document.querySelector(".fa-repeat");
 
 // Run on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function(event) {
   console.log('Run on DOMContentLoaded');
   // VARIABLES
   let moves = 0;
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   function newGame() {
-    // TODO: toggle all .match
-    // TODO: toggle all .open
-    // TODO: toggle all .show
-    // TODO: shuffle(deck);
+    CARDS.forEach(function(card){
+      card.classList.remove('match', 'open', 'show');
+    });
+    // shuffle(DECK);
     stars = 3;
     moves = 0;
     console.log('newGame called');
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // shuffle(deck);
 
   // On reset, shuffle cards, reset stars ...
-  reset.addEventListener("click", function(event) {
+  RESET.addEventListener("click", function(event) {
     console.log('reset clicked')
     newGame();
   });
@@ -112,7 +112,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // On lose, call newGame
 
   // On Click, display symbol and open cards
-  deck.addEventListener("click", function(event) {
+  DECK.addEventListener("click", function(event) {
     displaySymbol(event);
     openCards(event);
   });
