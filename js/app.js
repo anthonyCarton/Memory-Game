@@ -1,26 +1,38 @@
 // JavaScript Document
-const DECK = document.querySelector(".deck"); // TODO: shuffle needs this to be an array, not a nodeList...
+// Constant Variables
+const DECK = document.querySelector(".deck");
 const CARDS = DECK.querySelectorAll('li');
 const RESET = document.querySelector(".fa-repeat");
 
+// Variables
+let moves = 0;
+let stars = 3;
+// list that holds all of your cards
+let suits = [
+  "fa-diamond",
+  "fa-paper-plane-o",
+  "fa-anchor",
+  "fa-bolt",
+  "fa-cube",
+  "fa-anchor",
+  "fa-leaf",
+  "fa-bicycle",
+  "fa-diamond",
+  "fa-bomb",
+  "fa-leaf",
+  "fa-bomb",
+  "fa-bolt",
+  "fa-bicycle",
+  "fa-paper-plane-o",
+  "fa-cube"
+];
+
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
-  console.log('Run on DOMContentLoaded');
-  // VARIABLES
-  let moves = 0;
-  let stars = 3;
-
-  // TODO: Create a list that holds all of your cards, (and access with event listener?)
-  // TODO: Display the cards on the page
-    // TODO: Shuffle the list of cards using the provided "shuffle" method below
-    // listen for fa-repeat click, call shuffle()
-    // TODO: loop through each card and create its HTML
-    // TODO: add each card's HTML to the page
-
   // FUNCTIONS
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
-      var currentIndex = array.length, temporaryValue, randomIndex;
+      let currentIndex = array.length, temporaryValue, randomIndex;
       while (currentIndex !== 0) {
           randomIndex = Math.floor(Math.random() * currentIndex);
           currentIndex -= 1;
@@ -32,25 +44,37 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   function newGame() {
-    CARDS.forEach(function(card){
+    console.log('newGame()');
+    suits = shuffle(suits);
+    console.log(suits);
+    // Remove the card classes
+    CARDS.forEach(function(card, index){
+      let children = card.firstChild;
+      // Create i element
+      let element = document.createElement('i');
+      // Remove classes from card
       card.classList.remove('match', 'open', 'show');
+      // Add classes to I
+      element.classList.add('fa', suits[index]);
+      // Replace new card with old card
+      card.replaceChild(element, children);
     });
-    // shuffle(DECK);
+
+    // Reset stars and moves
     stars = 3;
     moves = 0;
-    console.log('newGame called');
   }
 
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
-    console.log('card is clicked');
+    console.log('displaySymbol()');
     event.target.classList.toggle("open");
     event.target.classList.toggle("show");
   }
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
   function openCards(event){
-    console.log('this card is on the list');
+    console.log('openCards()');
     // add card to open list
   }
 
@@ -100,8 +124,8 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   // EVENT LISTENERS & FUNCTION CALLS
-  // On page load, shuffle the deck.
-  // shuffle(deck);
+  // On DOMContentLoaded, call newGame
+  newGame();
 
   // On reset, shuffle cards, reset stars ...
   RESET.addEventListener("click", function(event) {
@@ -114,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // On Click, display symbol and open cards
   DECK.addEventListener("click", function(event) {
     displaySymbol(event);
-    openCards(event);
+    // openCards(event);
   });
 
 
