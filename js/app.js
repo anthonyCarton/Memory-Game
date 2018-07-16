@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
     console.log(suits);
 
     // It is generally understood that 7 shuffles are needed to create a  unique deck (in normal 52 card decks with riffle shuffling)
-    for (let i = 1;i<7;i++){
+    for (let i = 0;i<7;i++){
       suits = shuffle(suits);
     }
     console.log(suits);
