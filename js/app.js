@@ -2,13 +2,14 @@
 // Constant Variables
 const DECK = document.querySelector(".deck");
 const CARDS = DECK.querySelectorAll('li');
+const SUITS = document.querySelectorAll("li.card > i");
 const RESET = document.querySelector(".fa-repeat");
 
 // Variables
 let moves = 0;
 let stars = 3;
 // list that holds all of your cards
-let suits = [
+/* let suits = [
   "fa-diamond",
   "fa-paper-plane-o",
   "fa-anchor",
@@ -25,10 +26,12 @@ let suits = [
   "fa-bicycle",
   "fa-paper-plane-o",
   "fa-cube"
-];
+];*/
+let suits = []; // was altSuits
 
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
+
   // FUNCTIONS
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
@@ -45,6 +48,22 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   function newGame() {
     console.log('newGame()');
+    // empty the array
+    suits = [];
+    // load the suits into the array
+    SUITS.forEach(function(entry){
+      console.log('SUITS.forEach()');
+      console.log(entry);
+      // remove fa class
+      entry.classList.remove('fa');
+      // add entry.className to end of array
+      suits.push(entry.className); // was altSuits
+      // remove entry
+      entry.remove();
+    });
+    console.log(suits); // was altSuits
+
+
     suits = shuffle(suits);
     console.log(suits);
     // Remove the card classes
