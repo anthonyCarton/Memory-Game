@@ -8,30 +8,16 @@ const RESET = document.querySelector(".fa-repeat");
 // Variables
 let moves = 0;
 let stars = 3;
-// list that holds all of your cards
-/* let suits = [
-  "fa-diamond",
-  "fa-paper-plane-o",
-  "fa-anchor",
-  "fa-bolt",
-  "fa-cube",
-  "fa-anchor",
-  "fa-leaf",
-  "fa-bicycle",
-  "fa-diamond",
-  "fa-bomb",
-  "fa-leaf",
-  "fa-bomb",
-  "fa-bolt",
-  "fa-bicycle",
-  "fa-paper-plane-o",
-  "fa-cube"
-];*/
-let suits = []; // was altSuits
+
+let showall = function(){
+  CARDS.forEach(function(card){
+    card.classList.add('open', 'show')
+  });
+};
+
 
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
-
   // FUNCTIONS
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
@@ -48,24 +34,25 @@ document.addEventListener('DOMContentLoaded', function(event) {
 
   function newGame() {
     console.log('newGame()');
-    // empty the array
-    suits = [];
+    // (re)declare an empty array for suits
+    let suits = [];
     // load the suits into the array
     SUITS.forEach(function(entry){
-      console.log('SUITS.forEach()');
-      console.log(entry);
       // remove fa class
       entry.classList.remove('fa');
       // add entry.className to end of array
-      suits.push(entry.className); // was altSuits
+      suits.push(entry.className);
       // remove entry
       entry.remove();
     });
-    console.log(suits); // was altSuits
-
-
-    suits = shuffle(suits);
     console.log(suits);
+
+    // It is generally understood that 7 shuffles are needed to create a  unique deck (in normal 52 card decks with riffle shuffling)
+    for (let i = 1;i<7;i++){
+      suits = shuffle(suits);
+    }
+    console.log(suits);
+
     // Remove the card classes
     CARDS.forEach(function(card, index){
       let children = card.firstChild;
