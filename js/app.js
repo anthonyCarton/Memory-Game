@@ -75,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
     console.log('displaySymbol()');
+    // TODO: card not flipping back when click on symbol
     event.target.classList.toggle("open");
     event.target.classList.toggle("show");
   }
