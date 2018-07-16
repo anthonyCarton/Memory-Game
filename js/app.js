@@ -8,6 +8,7 @@ const RESET = document.querySelector(".fa-repeat");
 // Variables
 let moves = 0;
 let stars = 3;
+let suits = [];
 
 let showall = function(){
   CARDS.forEach(function(card){
@@ -19,6 +20,19 @@ let showall = function(){
 // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
   // FUNCTIONS
+  // Load cards into suitList()
+  function suitList(){
+    suits = [];
+    // load the suits into the array
+    SUITS.forEach(function(entry){
+      // remove fa class
+      entry.classList.remove('fa');
+      // add entry.className to end of array
+      suits.push(entry.className);
+      // remove entry
+      entry.remove();
+    });
+  }
   // Shuffle function from http://stackoverflow.com/a/2450976
   function shuffle(array) {
       let currentIndex = array.length, temporaryValue, randomIndex;
@@ -35,16 +49,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
   function newGame() {
     console.log('newGame()');
     // (re)declare an empty array for suits
-    let suits = [];
-    // load the suits into the array
-    SUITS.forEach(function(entry){
-      // remove fa class
-      entry.classList.remove('fa');
-      // add entry.className to end of array
-      suits.push(entry.className);
-      // remove entry
-      entry.remove();
-    });
     console.log(suits);
 
     // It is generally understood that 7 shuffles are needed to create a  unique deck (in normal 52 card decks with riffle shuffling)
@@ -130,9 +134,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   // EVENT LISTENERS & FUNCTION CALLS
-  // On DOMContentLoaded, call newGame
-  newGame();
-
   // On reset, shuffle cards, reset stars ...
   RESET.addEventListener("click", function(event) {
     console.log('reset clicked')
@@ -147,7 +148,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
     // openCards(event);
   });
 
+  // On DOMContentLoaded call suitList(), newGame()
 
+  suitList();
+  newGame();
 
   // The End
 });
