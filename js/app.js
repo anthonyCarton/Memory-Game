@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', function(event) {
   // FUNCTIONS
   // Load cards into suitList()
   function suitList(){
-    suits = [];
     // load the suits into the array
     SUITS.forEach(function(entry){
       // remove fa class
@@ -45,12 +44,10 @@ document.addEventListener('DOMContentLoaded', function(event) {
       }
       return array;
   }
-
+  // begin a newGame() at DOMContentLoaded or RESET
   function newGame() {
     console.log('newGame()');
-    // (re)declare an empty array for suits
     console.log(suits);
-
     // It is generally understood that 7 shuffles are needed to create a  unique deck (in normal 52 card decks with riffle shuffling)
     for (let i = 0;i<7;i++){
       suits = shuffle(suits);
