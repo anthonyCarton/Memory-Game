@@ -4,6 +4,8 @@ const DECK = document.querySelector(".deck");
 const CARDS = DECK.querySelectorAll('li');
 const SUITS = document.querySelectorAll("li.card > i");
 const RESET = document.querySelector(".fa-repeat");
+const STARS = document.querySelectorAll(".stars li")
+
 
 // Variables
 let moves = 0;
@@ -128,17 +130,27 @@ let showall = function(){
     // On first card click, start Timer
     // On game win, stop Timer
 
-  // TODO: Decrement Stars
-    // Call star decrement on not match case.
-  function starMinus(){
+  // Decrement Stars
+  function starMinus(){     // Call star decrement on not match case.
+    switch (stars) {
+      case 3:
+      STARS[2].firstElementChild.removeAttribute('class');
+      break;
+      case 2:
+      STARS[1].firstElementChild.removeAttribute('class');
+      break;
+      case 1:
+      STARS[0].firstElementChild.removeAttribute('class');
+      loseGame();
+      break;
+    }
     stars--;
     console.log(stars);
-    // update stars
-    if (stars == 0) {
-      loseGame();
-    }
   }
-  // Run on DOMContentLoaded
+
+
+
+  // // // Run on DOMContentLoaded
   document.addEventListener('DOMContentLoaded', function(event) {
   // On reset, shuffle cards, reset stars ...
   RESET.addEventListener("click", function(event) {
