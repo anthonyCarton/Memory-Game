@@ -16,9 +16,6 @@ let showall = function(){
   });
 };
 
-
-// Run on DOMContentLoaded
-document.addEventListener('DOMContentLoaded', function(event) {
   // FUNCTIONS
   // Load cards into suitList()
   function suitList(){
@@ -119,6 +116,13 @@ document.addEventListener('DOMContentLoaded', function(event) {
   }
 
   // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+  function winGame(){
+    console.log('winGame()');
+  }
+
+  function loseGame(){
+    console.log('loseGame()');
+  }
 
   // TODO: Timer
     // On first card click, start Timer
@@ -128,10 +132,14 @@ document.addEventListener('DOMContentLoaded', function(event) {
     // Call star decrement on not match case.
   function starMinus(){
     stars--;
+    console.log(stars);
     // update stars
+    if (stars == 0) {
+      loseGame();
+    }
   }
-
-  // EVENT LISTENERS & FUNCTION CALLS
+  // Run on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', function(event) {
   // On reset, shuffle cards, reset stars ...
   RESET.addEventListener("click", function(event) {
     console.log('reset clicked')
