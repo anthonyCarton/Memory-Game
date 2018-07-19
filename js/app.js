@@ -76,6 +76,8 @@ function newGame() {
   // Reset stars and moves
   stars = 7;
   moves = 0;
+
+  // TODO: put the stars back
 }
 
 
