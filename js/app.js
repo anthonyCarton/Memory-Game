@@ -201,9 +201,9 @@ RESET.addEventListener("click", function(event) {
 DECK.addEventListener("click", function(event) {
   //  Only call functions on unmatched cards
   if (event.target.tagName == "LI"
+    && openCards.length < 2
     && event.target.classList.contains('match') == false
-    && openCards.length < 2){
-      // TODO don't let them open the same card twice. if card.firstChild.contains('open'), don't flip
+    && event.target.classList.contains('open') == false){
       // flip the card when clicked
       displaySymbol(event);
       // add card to comparison list
