@@ -14,14 +14,15 @@ let suits = [];
 let openCards = [];
 
 
-let showall = function(){ // TODO remove when finished
+// TODO remove when finished
+let showall = function(){
   CARDS.forEach(function(card){
     card.classList.add('open', 'show')
   });
 };
 
 
-// FUNCTIONS
+// // // FUNCTIONS
 // Load cards into suitList()
 function suitList(){
   // load the suits into the array
