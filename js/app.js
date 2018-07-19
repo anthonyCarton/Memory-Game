@@ -8,8 +8,7 @@ const STARS = document.querySelectorAll(".stars li")
 
 
 // Variables
-let moves = 0;
-let stars = 3;  // TODO maybe you get 6 misses before you lose
+let stars, moves;
 let suits = [];
 let openCards = [];
 
@@ -75,7 +74,7 @@ function newGame() {
   });
 
   // Reset stars and moves
-  stars = 3;
+  stars = 7;
   moves = 0;
 }
 
@@ -169,10 +168,10 @@ function loseGame(){
 // Decrement Stars
 function starMinus(){     // Call star decrement on not match case.
   switch (stars) {
-    case 3:
+    case 5:
     STARS[2].firstElementChild.removeAttribute('class');
     break;
-    case 2:
+    case 3:
     STARS[1].firstElementChild.removeAttribute('class');
     break;
     case 1:
