@@ -76,7 +76,10 @@ function newGame() {
   stars = 7;
   moves = 0;
 
-  // TODO: put the stars back
+  // Put the stars back
+  STARS.forEach(function(star){
+    star.firstChild.classList.remove('hide');
+  });
 }
 
 
@@ -121,7 +124,7 @@ function cardsMatch(){
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
   // turn cards red, is there a class?
-  setTimeout(clearCards, 2000);
+  setTimeout(clearCards, 500);
 }
 
 
@@ -169,13 +172,13 @@ function loseGame(){
 function starMinus(){     // Call star decrement on not match case.
   switch (stars) {
     case 5:
-    STARS[2].firstElementChild.removeAttribute('class');
+    STARS[2].firstChild.classList.add('hide');
     break;
     case 3:
-    STARS[1].firstElementChild.removeAttribute('class');
+    STARS[1].firstChild.classList.add('hide');
     break;
     case 1:
-    STARS[0].firstElementChild.removeAttribute('class');
+    STARS[0].firstChild.classList.add('hide');
     loseGame();
     break;
   }
@@ -192,7 +195,6 @@ newGame();
 
 // On reset, shuffle cards, reset stars ...
 RESET.addEventListener("click", function(event) {
-  console.log('newGame()');
   newGame();
 });
 
