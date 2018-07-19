@@ -83,10 +83,8 @@ function newGame() {
 // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
 function displaySymbol(event){
   console.log('displaySymbol()');
-  event.target.classList.toggle("open");
-  event.target.classList.toggle("show");
-  // TODO once player flips two cards, cards automatically toggle back, so instead of toggle, use classList.add('') here
-  // event.target.classList.add('open', 'show');
+  event.target.classList.add('open', 'show');
+  // TODO don't let them open the same card twice.
 }
 
 
