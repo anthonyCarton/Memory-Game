@@ -89,26 +89,23 @@ function displaySymbol(event){
 // Add card to a list of open cards
 function cardList(event){
   if (openCards.length < 2) {
-    // append card.classList to openCards[]
     openCards.push(event.target);
     console.log(openCards)
   }
   if (openCards.length == 2) {
     cardCompare();
-
   }
   console.log(`${openCards.length} cards open`);
 }
 
 
-// TODO: If the list already has another card, check to see if the two cards match
+// compare card class symbols
 function cardCompare(){
   if (openCards[0].firstChild.className == openCards[1].firstChild.className){
     openCards[0].classList.add('match');
     openCards[0].classList.remove('open', 'show');
     openCards[1].classList.add('match');
     openCards[1].classList.remove('open', 'show');
-    // will I need to? openCard[1].classList.add('match');
     cardsMatch();
     counter();
   } else {
@@ -119,10 +116,9 @@ function cardCompare(){
 }
 
 
-// TODO add comment
+// flip cards back and remove from openCards
 function clearCards (){
   console.log('clearCards()');
-  // turn cards back after some time
   openCards[0].classList.remove('open', 'show');
   openCards[1].classList.remove('open', 'show');
   openCards = [];
