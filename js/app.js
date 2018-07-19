@@ -12,6 +12,8 @@ let moves = 0;
 let stars = 3;
 let suits = [];
 
+let openCards = [];
+
 let showall = function(){
   CARDS.forEach(function(card){
     card.classList.add('open', 'show')
@@ -81,21 +83,35 @@ let showall = function(){
   }
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
-  function openCards(event){
+  function cardList(event){
     console.log('openCards()');
-    // add card to open list
+    if (openCards.length < 2) {
+      // append card.classList to openCards[]
+      openCards.push(event.target);
+      console.log(openCards)
+    }
+    if (openCards.length == 2) {
+      cardCompare();
+      openCard = [];
+    }
+    console.log(openCards.length);
   }
 
   // TODO: If the list already has another card, check to see if the two cards match
   function cardCompare(){
-    /*if () {
+    if (openCards[0].firstChild.className == openCards[1].firstChild.className){
+      openCards[0].classList.add('match');
+      openCards[0].classList.remove('open', 'show');
+      openCards[1].classList.add('match');
+      openCards[1].classList.remove('open', 'show');
+      // will I need to? openCard[1].classList.add('match');
       cardsMatch();
       counter();
     } else {
       cardsDontMatch();
       starMinus();
       counter();
-    }*/
+    }
   }
 
   // TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
@@ -164,7 +180,7 @@ let showall = function(){
   // On Click, display symbol and open cards
   DECK.addEventListener("click", function(event) {
     displaySymbol(event);
-    // openCards(event);
+    cardList(event);
   });
 
   // On DOMContentLoaded call suitList(), newGame()
