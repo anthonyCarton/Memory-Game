@@ -1,16 +1,15 @@
 // JavaScript Document
 // Constant Variables
-const DECK = document.querySelector(".deck");
-const CARDS = DECK.querySelectorAll('li');
-const SUITS = document.querySelectorAll("li.card > i");
-const RESET = document.querySelector(".fa-repeat");
-const STARS = document.querySelectorAll(".stars li")
+const DECK = document.querySelector('.deck');
+const CARDS = DECK.querySelectorAll('li.card');
+const SUITS = DECK.querySelectorAll('li.card > i');
+const RESET = document.querySelector('.fa-repeat');
+const STARS = document.querySelectorAll('.stars li')
 
 
 // Variables
 let stars, moves;
-let suits = [];
-let openCards = [];
+let suits = [], openCards = [];
 
 
 // TODO remove when finished
