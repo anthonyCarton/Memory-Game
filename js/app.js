@@ -74,9 +74,10 @@ let showall = function(){
   // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
   function displaySymbol(event){
     console.log('displaySymbol()');
-    // TODO: card not flipping back when click on symbol
     event.target.classList.toggle("open");
     event.target.classList.toggle("show");
+    // TODO once player flips two cards, cards automatically toggle back, so instead of toggle, use classList.add('') here
+    // event.target.classList.add('open', 'show');
   }
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
