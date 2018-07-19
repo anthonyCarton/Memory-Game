@@ -99,23 +99,6 @@ function cardList(event){
 }
 
 
-// compare card class symbols
-function cardCompare(){
-  if (openCards[0].firstChild.className == openCards[1].firstChild.className){
-    openCards[0].classList.add('match');
-    openCards[0].classList.remove('open', 'show');
-    openCards[1].classList.add('match');
-    openCards[1].classList.remove('open', 'show');
-    cardsMatch();
-    counter();
-  } else {
-    cardsDontMatch();
-    starMinus();
-    counter();
-  }
-}
-
-
 // flip cards back and remove from openCards
 function clearCards (){
   console.log('clearCards()');
@@ -125,28 +108,47 @@ function clearCards (){
 }
 
 
-// TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+// If the cards match, lock in open position
 function cardsMatch(){
   console.log('cardsMatch()');
+  openCards[0].classList.add('match');
+  openCards[0].classList.remove('open', 'show');
+  openCards[1].classList.add('match');
+  openCards[1].classList.remove('open', 'show');
   clearCards();
 }
 
 
-// TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+// If  cards do not match, remove cards from list and flip
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
   setTimeout(clearCards, 2000);
 }
 
 
+// compare card class symbols
+function cardCompare(){
+  if (openCards[0].firstChild.className == openCards[1].firstChild.className){
+    cardsMatch();
+  } else {
+    cardsDontMatch();
+    starMinus();
+  }
+  counter();
+}
+
+
 // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 function counter(){
-  moves++;
   // update new moves count
+  moves++;
+  // console.log(moves);
+  // display on page (in another function?)
 }
 
 
 // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+// TODO create matchCount variable, increment in cardsMatch, win at 8?
 function winGame(){
   console.log('winGame()');
   // On win, alert user, call newGame
@@ -156,7 +158,6 @@ function winGame(){
 function loseGame(){
   console.log('loseGame()');
   // On lose, alert user, call newGame()
-
 }
 
 
@@ -192,7 +193,7 @@ newGame();
 
 // On reset, shuffle cards, reset stars ...
 RESET.addEventListener("click", function(event) {
-  console.log('reset clicked')
+  console.log('newGame()');
   newGame();
 });
 
@@ -203,7 +204,7 @@ DECK.addEventListener("click", function(event) {
   if (event.target.tagName == "LI"
     && event.target.classList.contains('match') == false
     && openCards.length < 2){
-      // TODO don't let them open the same card twice.
+      // TODO don't let them open the same card twice. if card.firstChild.contains('open'), don't flip
       // flip the card when clicked
       displaySymbol(event);
       // add card to comparison list
