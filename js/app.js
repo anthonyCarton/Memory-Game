@@ -106,8 +106,7 @@ function cardList(event){
 // flip cards back and remove from openCards
 function clearCards (){
   console.log('clearCards()');
-  openCards[0].classList.remove('open', 'show');
-  openCards[1].classList.remove('open', 'show');
+  openCards.forEach( function(card){ card.classList.remove('open', 'show', 'nope') });
   openCards = [];
 }
 
@@ -115,8 +114,7 @@ function clearCards (){
 // If cards match, lock open
 function cardsMatch(){
   console.log('cardsMatch()');
-  openCards[0].classList.add('match');
-  openCards[1].classList.add('match');
+  openCards.forEach( function(card){ card.classList.add('match') });
   clearCards();
 }
 
@@ -124,8 +122,8 @@ function cardsMatch(){
 // If  cards do not match, remove cards from list and flip
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
-  // TODO: turn cards red, is there a class?
-  setTimeout(clearCards, 500);
+  openCards.forEach( function(card){ card.classList.add('nope') });
+  setTimeout(clearCards, 500); // TODO: set to 1000 or 1500 at end
   starMinus();
 }
 
