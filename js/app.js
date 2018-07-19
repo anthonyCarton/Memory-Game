@@ -49,17 +49,18 @@ function shuffle(array) {
 }
 
 
-// begin a newGame() (on DOMContentLoaded or RESET)
+// Set a newGame() (on DOMContentLoaded or RESET)
 function newGame() {
   console.log('newGame()');
   console.log(suits);
-  // shuffle 7 deck times
+
+  // Shuffle 7 times
   for (let i = 0; i<7; i++){
     suits = shuffle(suits);
   }
   console.log(suits);
 
-  // deal the cards
+  // Deal cards
   CARDS.forEach(function(card, index){
     let children = card.firstChild;
     // Create i element
@@ -76,7 +77,7 @@ function newGame() {
   stars = 7;
   moves = 0;
 
-  // Put the stars back
+  // Reset star icons
   STARS.forEach(function(star){
     star.firstChild.classList.remove('hide');
   });
@@ -89,11 +90,11 @@ function displaySymbol(event){
 }
 
 
-// Add card to a list of open cards
+// Add card to openCards[]
 function cardList(event){
   if (openCards.length < 2) {
     openCards.push(event.target);
-    console.log(openCards)
+    console.log(openCards);
   }
   if (openCards.length == 2) {
     cardCompare();
@@ -111,7 +112,7 @@ function clearCards (){
 }
 
 
-// If the cards match, lock in open position
+// If cards match, lock open
 function cardsMatch(){
   console.log('cardsMatch()');
   openCards[0].classList.add('match');
@@ -123,8 +124,9 @@ function cardsMatch(){
 // If  cards do not match, remove cards from list and flip
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
-  // turn cards red, is there a class?
+  // TODO: turn cards red, is there a class?
   setTimeout(clearCards, 500);
+  starMinus();
 }
 
 
@@ -134,7 +136,6 @@ function cardCompare(){
     cardsMatch();
   } else {
     cardsDontMatch();
-    starMinus();
   }
   counter();
 }
@@ -145,7 +146,7 @@ function counter(){
   // update new moves count
   moves++;
   // console.log(moves);
-  // display on page (in another function?)
+  // TODO: display on page (in another function?)
 }
 
 
@@ -206,9 +207,9 @@ DECK.addEventListener("click", function(event) {
     && openCards.length < 2
     && event.target.classList.contains('match') == false
     && event.target.classList.contains('open') == false){
-      // flip the card when clicked
+      // flip the card
       displaySymbol(event);
-      // add card to comparison list
+      // add to comparison list
       cardList(event);
   }
 });
