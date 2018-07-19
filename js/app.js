@@ -13,11 +13,13 @@ let stars = 3;  // TODO maybe you get 6 misses before you lose
 let suits = [];
 let openCards = [];
 
+
 let showall = function(){ // TODO remove when finished
   CARDS.forEach(function(card){
     card.classList.add('open', 'show')
   });
 };
+
 
 // FUNCTIONS
 // Load cards into suitList()
@@ -34,7 +36,6 @@ function suitList(){
 }
 
 
-
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -47,7 +48,6 @@ function shuffle(array) {
     }
     return array;
 }
-
 
 
 // begin a newGame() at DOMContentLoaded or RESET
@@ -78,6 +78,7 @@ function newGame() {
   moves = 0;
 }
 
+
 // TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
 function displaySymbol(event){
   console.log('displaySymbol()');
@@ -86,6 +87,7 @@ function displaySymbol(event){
   // TODO once player flips two cards, cards automatically toggle back, so instead of toggle, use classList.add('') here
   // event.target.classList.add('open', 'show');
 }
+
 
 // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
 function cardList(event){
@@ -104,6 +106,7 @@ function cardList(event){
   console.log(`${openCards.length} cards open`);
 }
 
+
 // TODO: If the list already has another card, check to see if the two cards match
 function cardCompare(){
   if (openCards[0].firstChild.className == openCards[1].firstChild.className){
@@ -121,18 +124,8 @@ function cardCompare(){
   }
 }
 
-// TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
-function cardsMatch(){
-  // element.matches(selectorString)
-  clearCards();
-}
 
-// TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
-function cardsDontMatch(){
-  console.log('cardsDontMatch()');
-  setTimeout(clearCards, 2000);
-}
-
+// TODO add comment
 function clearCards (){
   console.log('clearCards()');
   // turn cards back after some time
@@ -141,11 +134,27 @@ function clearCards (){
   openCards = [];
 }
 
+
+// TODO:  + if the cards do match, lock the cards in the open position (put this functionality in another function that you call from this one)
+function cardsMatch(){
+  console.log('cardsMatch()');
+  clearCards();
+}
+
+
+// TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
+function cardsDontMatch(){
+  console.log('cardsDontMatch()');
+  setTimeout(clearCards, 2000);
+}
+
+
 // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
 function counter(){
   moves++;
   // update new moves count
 }
+
 
 // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
 function winGame(){
@@ -153,15 +162,18 @@ function winGame(){
   // On win, alert user, call newGame
 }
 
+
 function loseGame(){
   console.log('loseGame()');
   // On lose, alert user, call newGame()
 
 }
 
+
 // TODO: Timer
   // On first card click, start Timer
   // On game win, stop Timer
+
 
 // Decrement Stars
 function starMinus(){     // Call star decrement on not match case.
@@ -182,12 +194,10 @@ function starMinus(){     // Call star decrement on not match case.
 }
 
 
-
 // // // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
 suitList();
 newGame();
-
 
 
 // On reset, shuffle cards, reset stars ...
