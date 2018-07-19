@@ -13,9 +13,10 @@ let suits = [], openCards = [];
 
 
 // TODO remove when finished
-let showall = function(){
+let flipall = function(){
   CARDS.forEach(function(card){
-    card.classList.add('open', 'show')
+    card.classList.toggle('open');
+    card.classList.toggle('show');
   });
 };
 
@@ -23,7 +24,6 @@ let showall = function(){
 // // // FUNCTIONS
 // Load cards into suitList()
 function suitList(){
-  // load the suits into the array
   SUITS.forEach(function(entry){
     // remove fa class
     entry.classList.remove('fa');
@@ -49,17 +49,17 @@ function shuffle(array) {
 }
 
 
-// begin a newGame() at DOMContentLoaded or RESET
+// begin a newGame() (on DOMContentLoaded or RESET)
 function newGame() {
   console.log('newGame()');
   console.log(suits);
-  // shuffle 7 times
+  // shuffle 7 deck times
   for (let i = 0; i<7; i++){
     suits = shuffle(suits);
   }
   console.log(suits);
 
-  // Remove the card classes
+  // deal the cards
   CARDS.forEach(function(card, index){
     let children = card.firstChild;
     // Create i element
@@ -80,7 +80,7 @@ function newGame() {
 }
 
 
-// display this cards symbol (flip the card)
+// flip the card
 function displaySymbol(event){
   event.target.classList.add('open', 'show');
 }
@@ -112,9 +112,7 @@ function clearCards (){
 function cardsMatch(){
   console.log('cardsMatch()');
   openCards[0].classList.add('match');
-  openCards[0].classList.remove('open', 'show');
   openCards[1].classList.add('match');
-  openCards[1].classList.remove('open', 'show');
   clearCards();
 }
 
@@ -122,6 +120,7 @@ function cardsMatch(){
 // If  cards do not match, remove cards from list and flip
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
+  // turn cards red, is there a class?
   setTimeout(clearCards, 2000);
 }
 
