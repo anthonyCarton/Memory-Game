@@ -9,12 +9,11 @@ const STARS = document.querySelectorAll(".stars li")
 
 // Variables
 let moves = 0;
-let stars = 3;
+let stars = 3;  // TODO maybe you get 6 misses before you lose
 let suits = [];
-
 let openCards = [];
 
-let showall = function(){
+let showall = function(){ // TODO remove when finished
   CARDS.forEach(function(card){
     card.classList.add('open', 'show')
   });
@@ -84,15 +83,17 @@ let showall = function(){
 
   // TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
   function cardList(event){
-    console.log('openCards()');
-    if (openCards.length < 2) {
-      // append card.classList to openCards[]
-      openCards.push(event.target);
-      console.log(openCards)
-    }
-    if (openCards.length == 2) {
-      cardCompare();
-      openCard = [];
+    console.log('cardList()');
+    if (event.target.className != 'match' && event.target.className != 'deck') {
+      if (openCards.length < 2) {
+        // append card.classList to openCards[]
+        openCards.push(event.target);
+        console.log(openCards)
+      }
+      if (openCards.length == 2) {
+        cardCompare();
+
+      }
     }
     console.log(openCards.length);
   }
@@ -121,11 +122,16 @@ let showall = function(){
 
   // TODO:  + if the cards do not match, remove the cards from the list and hide the card's symbol (put this functionality in another function that you call from this one)
   function cardsDontMatch(){
-
+    console.log('cardsDontMatch()');
+    setTimeout(clearCards, 2000);
   }
 
   function clearCards (){
+    console.log('clearCards()');
     // turn cards back after some time
+    openCards[0].classList.remove('open', 'show');
+    openCards[1].classList.remove('open', 'show');
+    openCards = [];
   }
 
   // TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
@@ -179,14 +185,17 @@ let showall = function(){
 
   // On Click, display symbol and open cards
   DECK.addEventListener("click", function(event) {
-    displaySymbol(event);
-    cardList(event);
+    if (event.target.tagName == "LI"){
+      displaySymbol(event);
+      cardList(event);
+    }
   });
 
   // On DOMContentLoaded call suitList(), newGame()
 
   suitList();
   newGame();
+
 
   // The End
 });
