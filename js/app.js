@@ -5,6 +5,7 @@ const CARDS = DECK.querySelectorAll('li.card');
 const SUITS = DECK.querySelectorAll('li.card > i');
 const RESET = document.querySelector('.fa-repeat');
 const STARS = document.querySelectorAll('.stars li')
+const MOVES = document.querySelector('.moves');
 
 
 // Variables
@@ -22,7 +23,7 @@ let flipall = function(){
 
 
 // // // FUNCTIONS
-// Load cards into suitList()
+// Load each card into suits[]
 function suitList(){
   SUITS.forEach(function(entry){
     // remove fa class
@@ -46,6 +47,13 @@ function shuffle(array) {
         array[randomIndex] = temporaryValue;
     }
     return array;
+}
+
+
+// Increment moves and display on page
+function counter(){
+  moves++;
+  MOVES.innerText = moves;
 }
 
 
@@ -73,14 +81,14 @@ function newGame() {
     card.replaceChild(element, children);
   });
 
-  // Reset stars and moves
+  // Reset star count and icons
   stars = 7;
-  moves = 0;
-
-  // Reset star icons
   STARS.forEach(function(star){
     star.firstChild.classList.remove('hide');
   });
+  // Reset move and run counter() to display moves
+  moves = -1;
+  counter();
 }
 
 
@@ -136,15 +144,6 @@ function cardCompare(){
     cardsDontMatch();
   }
   counter();
-}
-
-
-// TODO:  + increment the move counter and display it on the page (put this functionality in another function that you call from this one)
-function counter(){
-  // update new moves count
-  moves++;
-  // console.log(moves);
-  // TODO: display on page (in another function?)
 }
 
 
