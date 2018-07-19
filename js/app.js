@@ -55,8 +55,8 @@ function shuffle(array) {
 function newGame() {
   console.log('newGame()');
   console.log(suits);
-  // It is generally understood that 7 shuffles are needed to create a  unique deck (in normal 52 card decks with riffle shuffling)
-  for (let i = 0;i<7;i++){
+  // shuffle 7 times
+  for (let i = 0; i<7; i++){
     suits = shuffle(suits);
   }
   console.log(suits);
@@ -80,27 +80,22 @@ function newGame() {
 }
 
 
-// TODO:  If a card is clicked: display the card's symbol (put this functionality in another function that you call from this one)
+// display this cards symbol (flip the card)
 function displaySymbol(event){
-  console.log('displaySymbol()');
   event.target.classList.add('open', 'show');
-  // TODO don't let them open the same card twice.
 }
 
 
-// TODO:  If a card is clicked: add the card to a *list* of "open" cards (put this functionality in another function that you call from this one)
+// Add card to a list of open cards
 function cardList(event){
-  console.log('cardList()');
-  if (event.target.className != 'match') {
-    if (openCards.length < 2) {
-      // append card.classList to openCards[]
-      openCards.push(event.target);
-      console.log(openCards)
-    }
-    if (openCards.length == 2) {
-      cardCompare();
+  if (openCards.length < 2) {
+    // append card.classList to openCards[]
+    openCards.push(event.target);
+    console.log(openCards)
+  }
+  if (openCards.length == 2) {
+    cardCompare();
 
-    }
   }
   console.log(`${openCards.length} cards open`);
 }
@@ -212,7 +207,10 @@ DECK.addEventListener("click", function(event) {
   if (event.target.tagName == "LI"
     && event.target.classList.contains('match') == false
     && openCards.length < 2){
+      // TODO don't let them open the same card twice.
+      // flip the card when clicked
       displaySymbol(event);
+      // add card to comparison list
       cardList(event);
   }
 });
