@@ -131,7 +131,7 @@ function cardsMatch(){
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
   openCards.forEach( function(card){ card.classList.add('nope') });
-  setTimeout(clearCards, 500); // TODO: set to 1000 or 1500 at end
+  setTimeout(clearCards, 1000); 
   starMinus();
 }
 
