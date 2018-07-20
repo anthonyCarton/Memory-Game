@@ -27,15 +27,6 @@ function stopTimer(){
 }
 
 
-// TODO remove when finished
-let flipall = function(){
-  CARDS.forEach(function(card){
-    card.classList.toggle('open');
-    card.classList.toggle('show');
-  });
-};
-
-
 // // // FUNCTIONS
 // Load each card into suits[]
 function suitList(){
@@ -109,7 +100,7 @@ function newGame() {
   matchCount = 0;
   console.log('matchCount reset');
 
-  // TODO start timeCount (on card('click' ... ?)
+  // Start timeCount @ 0sec on 1st click
   timeCount = 0;
   DECK.addEventListener('click', startTimer);
 }
@@ -168,8 +159,6 @@ function winGame(){
   stopTimer();
   console.log('stopTimer()');
   // On win, alert user, call newGame
-  // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-  //window.alert('you win');
   window.alert(
 `YOU WIN!!
 Your time was ${timeCount} seconds.
