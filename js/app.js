@@ -6,6 +6,7 @@ const SUITS = DECK.querySelectorAll('li.card > i');
 const RESET = document.querySelector('.fa-repeat');
 const STARS = document.querySelectorAll('.stars li')
 const MOVES = document.querySelector('.moves');
+const TIMER = document.querySelector('.timer');
 
 
 // Variables
@@ -15,6 +16,7 @@ let suits = [], openCards = [];
 
 function gameTimer(){
     timeCount++;
+    TIMER.innerText = timeCount;
 }
 function startTimer(){
  timerID = window.setInterval(gameTimer, 1000);
