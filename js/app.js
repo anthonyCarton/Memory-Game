@@ -9,8 +9,22 @@ const MOVES = document.querySelector('.moves');
 
 
 // Variables
-let stars, moves;
+let stars, moves, matchCount, timeCount, timerID;
 let suits = [], openCards = [];
+
+
+function gameTimer(){
+    timeCount++;
+}
+function startTimer(){
+ timerID = window.setInterval(gameTimer, 1000);
+ console.log('timer started');
+ DECK.removeEventListener('click', startTimer);
+ console.log('event listener removed')
+}
+function stopTimer(){
+  clearInterval(timerID);
+}
 
 
 // TODO remove when finished
@@ -60,14 +74,12 @@ function counter(){
 // Set a newGame() (on DOMContentLoaded or RESET)
 function newGame() {
   console.log('newGame()');
-  console.log(suits);
-
+  console.log('preshuffle');
   // Shuffle 7 times
   for (let i = 0; i<7; i++){
     suits = shuffle(suits);
   }
-  console.log(suits);
-
+  console.log('postshuffle');
   // Deal cards
   CARDS.forEach(function(card, index){
     let children = card.firstChild;
@@ -80,16 +92,28 @@ function newGame() {
     // Replace new card with old card
     card.replaceChild(element, children);
   });
-
+  console.log('cards dealt');
   // Reset star count and icons
   stars = 7;
   STARS.forEach(function(star){
     star.firstChild.classList.remove('hide');
   });
+  console.log('stars reset');
+
   // Reset move and run counter() to display moves
   moves = -1;
   counter();
+  console.log('moves counter reset');
+
+  // Count the matches
+  matchCount = 0;
+  console.log('matchCount reset');
+
+  // TODO start timeCount (on card('click' ... ?)
+  timeCount = 0;
+  DECK.addEventListener('click', startTimer);
 }
+
 
 
 // flip the card
@@ -124,6 +148,8 @@ function cardsMatch(){
   console.log('cardsMatch()');
   openCards.forEach( function(card){ card.classList.add('match') });
   clearCards();
+  matchCount++;
+  console.log(`${matchCount} matches`);
 }
 
 
@@ -131,8 +157,37 @@ function cardsMatch(){
 function cardsDontMatch(){
   console.log('cardsDontMatch()');
   openCards.forEach( function(card){ card.classList.add('nope') });
-  setTimeout(clearCards, 1000); 
+  setTimeout(clearCards, 1000);
   starMinus();
+}
+
+
+// winGame() at 8 matches
+function winGame(){
+  console.log('winGame()');
+  stopTimer();
+  console.log('stopTimer()');
+  // On win, alert user, call newGame
+  // TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
+  //window.alert('you win');
+  window.alert(
+`YOU WIN!!
+Your time was ${timeCount} seconds.
+Your score is ${stars} points.
+Play again?`
+  )
+  newGame();
+}
+
+
+// loseGame() at 0 stars
+function loseGame(){
+  console.log('loseGame()');
+  stopTimer();
+  console.log('stopTimer()');
+  // On lose, alert user, call newGame()
+  window.alert('you lose');
+  newGame();
 }
 
 
@@ -144,26 +199,15 @@ function cardCompare(){
     cardsDontMatch();
   }
   counter();
+  // Winner?
+  if (matchCount == 8) {
+    winGame();
+  }
+  // Loser?
+  if (stars == 0) {
+    loseGame();
+  }
 }
-
-
-// TODO:  + if all cards have matched, display a message with the final score (put this functionality in another function that you call from this one)
-// TODO create matchCount variable, increment in cardsMatch, win at 8?
-function winGame(){
-  console.log('winGame()');
-  // On win, alert user, call newGame
-}
-
-
-function loseGame(){
-  console.log('loseGame()');
-  // On lose, alert user, call newGame()
-}
-
-
-// TODO: Timer
-  // On first card click, start Timer
-  // On game win, stop Timer
 
 
 // Decrement Stars
@@ -193,6 +237,7 @@ newGame();
 
 // On reset, shuffle cards, reset stars ...
 RESET.addEventListener("click", function(event) {
+  stopTimer();
   newGame();
 });
 
