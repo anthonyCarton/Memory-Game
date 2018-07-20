@@ -4,7 +4,7 @@ const DECK = document.querySelector('.deck');
 const CARDS = DECK.querySelectorAll('li.card');
 const SUITS = DECK.querySelectorAll('li.card > i');
 const RESET = document.querySelector('.fa-repeat');
-const STARS = document.querySelectorAll('.stars li')
+const STARS = document.querySelectorAll('.stars li');
 const MOVES = document.querySelector('.moves');
 const TIMER = document.querySelector('.timer');
 
@@ -14,30 +14,32 @@ let stars, moves, matchCount, timeCount, timerID;
 let suits = [], openCards = [];
 
 
+// // // FUNCTIONS
 function gameTimer(){
-    timeCount++;
-    TIMER.innerText = timeCount;
+  // increment timeCount and display on .html
+  timeCount++;
+  TIMER.innerText = timeCount;
 }
+
+
 function startTimer(){
- timerID = window.setInterval(gameTimer, 1000);
- console.log('timer started');
- DECK.removeEventListener('click', startTimer);
- console.log('event listener removed')
+  // create timer, start on click
+  timerID = window.setInterval(gameTimer, 1000);
+  DECK.removeEventListener('click', startTimer);
 }
+
+
 function stopTimer(){
   clearInterval(timerID);
 }
 
 
-// // // FUNCTIONS
-// Load each card into suits[]
 function suitList(){
+  // Load each card into suits[]
   SUITS.forEach(function(entry){
-    // remove fa class
+    // remove fa class, add classes to suits[], remove entry
     entry.classList.remove('fa');
-    // add entry.className to end of array
     suits.push(entry.className);
-    // remove entry
     entry.remove();
   });
 }
@@ -57,133 +59,107 @@ function shuffle(array) {
 }
 
 
-// Increment moves and display on page
 function counter(){
+  // Increment moves and display on .html
   moves++;
   MOVES.innerText = moves;
 }
 
 
-// Set a newGame() (on DOMContentLoaded or RESET)
 function newGame() {
-  console.log('newGame()');
-  console.log('preshuffle');
-  // Shuffle 7 times
+  // Set a newGame() (on DOMContentLoaded or RESET)
   for (let i = 0; i<7; i++){
+    // Shuffle 7 times
     suits = shuffle(suits);
   }
-  console.log('postshuffle');
   // Deal cards
   CARDS.forEach(function(card, index){
+    // create i, remove classes, add to i, replace card
     let children = card.firstChild;
-    // Create i element
     let element = document.createElement('i');
-    // Remove classes from card
     card.classList.remove('match', 'open', 'show');
-    // Add classes to I
     element.classList.add('fa', suits[index]);
-    // Replace new card with old card
     card.replaceChild(element, children);
   });
-  console.log('cards dealt');
   // Reset star count and icons
   stars = 9;
   STARS.forEach(function(star){
     star.firstChild.classList.remove('hide');
   });
-  console.log('stars reset');
-
   // Reset move and run counter() to display moves
   moves = -1;
   counter();
-  console.log('moves counter reset');
-
-  // Count the matches
+  // reset matcheCount
   matchCount = 0;
-  console.log('matchCount reset');
-
   // Start timeCount @ 0sec on 1st click
   timeCount = 0;
   DECK.addEventListener('click', startTimer);
 }
 
 
-
-// flip the card
 function displaySymbol(event){
+  // flip card
   event.target.classList.add('open', 'show');
 }
 
 
-// Add card to openCards[]
 function cardList(event){
+  // Add card to openCards[], 2 cards / turn, compare 2nd card
   if (openCards.length < 2) {
     openCards.push(event.target);
-    console.log(openCards);
   }
   if (openCards.length == 2) {
     cardCompare();
   }
-  console.log(`${openCards.length} cards open`);
 }
 
 
-// flip cards back and remove from openCards
 function clearCards (){
-  console.log('clearCards()');
-  openCards.forEach( function(card){ card.classList.remove('open', 'show', 'nope') });
+  // flip cards back and remove from openCards
+  openCards.forEach( function(card){
+    card.classList.remove('open', 'show', 'nope');
+  });
   openCards = [];
 }
 
 
-// If cards match, lock open
 function cardsMatch(){
-  console.log('cardsMatch()');
+  // If cards match, lock open
   openCards.forEach( function(card){ card.classList.add('match') });
   clearCards();
   matchCount++;
-  console.log(`${matchCount} matches`);
 }
 
 
-// If  cards do not match, remove cards from list and flip
 function cardsDontMatch(){
-  console.log('cardsDontMatch()');
+  // If no match, remove from list and flip after 1s
   openCards.forEach( function(card){ card.classList.add('nope') });
   setTimeout(clearCards, 1000);
   starMinus();
 }
 
 
-// winGame() at 8 matches
 function winGame(){
-  console.log('winGame()');
+  // winGame() at 8 matches, stopTimer(), alert user, call newGame
   stopTimer();
-  console.log('stopTimer()');
-  // On win, alert user, call newGame
-  window.alert(
-`YOU WIN!!
+  window.alert(`YOU WIN!!
 Your time was ${timeCount} seconds.
 Your score is ${stars} points.
-Play again?`
-  )
+Play again?`);
   newGame();
 }
 
 
-// loseGame() at 0 stars
 function loseGame(){
-  console.log('loseGame()');
+  // loseGame() at 0 stars, stopTimer(), alert user, call newGame()
   stopTimer();
-  console.log('stopTimer()');
-  // On lose, alert user, call newGame()
-  window.alert('you lose');
+  window.alert('you lose :(');
   newGame();
 }
 
 
-// compare card class symbols
 function cardCompare(){
+  // compare card class symbols
   if (openCards[0].firstChild.className == openCards[1].firstChild.className){
     cardsMatch();
   } else {
@@ -201,8 +177,8 @@ function cardCompare(){
 }
 
 
-// Decrement Stars
-function starMinus(){     // Call star decrement on not match case.
+function starMinus(){
+  // Decrement stars on not match.
   switch (stars) {
     case 6:
     STARS[2].firstChild.classList.add('hide');
@@ -216,36 +192,31 @@ function starMinus(){     // Call star decrement on not match case.
     break;
   }
   stars--;
-  console.log(`${stars} stars`);
 }
 
 
 // // // Run on DOMContentLoaded
 document.addEventListener('DOMContentLoaded', function(event) {
-suitList();
-newGame();
-
-
-// On reset, shuffle cards, reset stars ...
-RESET.addEventListener("click", function(event) {
-  stopTimer();
+  suitList();
   newGame();
-});
 
 
-// On Click, display symbol and open cards
-DECK.addEventListener("click", function(event) {
-  //  Only call functions on unmatched cards
-  if (event.target.tagName == "LI"
-    && openCards.length < 2
-    && event.target.classList.contains('match') == false
-    && event.target.classList.contains('open') == false){
-      // flip the card
-      displaySymbol(event);
-      // add to comparison list
-      cardList(event);
-  }
-});
+  RESET.addEventListener("click", function(event) {
+    stopTimer();
+    newGame();
+  });
+
+
+  DECK.addEventListener("click", function(event) {
+    // Only call functions on unmatched cards
+    if (event.target.tagName == "LI"
+      && openCards.length < 2
+      && event.target.classList.contains('match') == false
+      && event.target.classList.contains('open') == false){
+        displaySymbol(event);
+        cardList(event);
+    }
+  });
 
 
 // The End
