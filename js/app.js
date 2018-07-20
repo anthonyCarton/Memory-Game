@@ -94,7 +94,7 @@ function newGame() {
   });
   console.log('cards dealt');
   // Reset star count and icons
-  stars = 7;
+  stars = 9;
   STARS.forEach(function(star){
     star.firstChild.classList.remove('hide');
   });
@@ -213,13 +213,13 @@ function cardCompare(){
 // Decrement Stars
 function starMinus(){     // Call star decrement on not match case.
   switch (stars) {
-    case 5:
+    case 6:
     STARS[2].firstChild.classList.add('hide');
     break;
-    case 3:
+    case 4:
     STARS[1].firstChild.classList.add('hide');
     break;
-    case 1:
+    case 2:
     STARS[0].firstChild.classList.add('hide');
     loseGame();
     break;
