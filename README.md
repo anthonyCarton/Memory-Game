@@ -16,5 +16,8 @@ It's very important that you plan your project before you start writing any code
 * Work on the winning condition. How does your game “know” if a player has won?
 * We recommend saving styling until the very end. Allow your game logic and functionality to dictate the styling.
 
+## Dependencies
+Project uses icons from [Font-Awesome](https://fontawesome.com/) and typography from [Google Fonts](https://fonts.google.com).
+
 ## Contributing
 This is a project for my class so I will probably not be accepting contributions.
