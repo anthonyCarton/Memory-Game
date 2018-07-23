@@ -15,27 +15,33 @@ let suits = [], openCards = [];
 
 
 // // // FUNCTIONS
+/**
+  * @description increments timeCount and updates html timer
+  */
 function gameTimer(){
-  // increment timeCount and display on .html
   timeCount++;
   TIMER.innerText = timeCount;
 }
 
-
+/**
+  * @description starts timer on first card click
+  */
 function startTimer(){
-  // create timer, start on click
   timerID = window.setInterval(gameTimer, 1000);
   DECK.removeEventListener('click', startTimer);
 }
 
-
+/**
+  * @description stops timer when called
+  */
 function stopTimer(){
   clearInterval(timerID);
 }
 
-
+/**
+  * @description load each card into suits[]
+  */
 function suitList(){
-  // Load each card into suits[]
   SUITS.forEach(function(entry){
     // remove fa class, add classes to suits[], remove entry
     entry.classList.remove('fa');
@@ -45,7 +51,9 @@ function suitList(){
 }
 
 
-// Shuffle function from http://stackoverflow.com/a/2450976
+/**
+  * @description Shuffle function from http://stackoverflow.com/a/2450976
+  */
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
     while (currentIndex !== 0) {
@@ -58,16 +66,18 @@ function shuffle(array) {
     return array;
 }
 
-
+/**
+  * @description increment moves and display on .html
+  */
 function counter(){
-  // Increment moves and display on .html
   moves++;
   MOVES.innerText = moves;
 }
 
-
+/**
+  * @description set a new game on DOMContentLoaded, deal cards, reset stars, moves, matches, openCards and times
+  */
 function newGame() {
-  // Set a newGame() (on DOMContentLoaded or RESET)
   for (let i = 0; i<7; i++){
     // Shuffle 7 times
     suits = shuffle(suits);
@@ -98,15 +108,19 @@ function newGame() {
   openCards = [];
 }
 
-
+/**
+  * @description flip card
+  * @param event - the event from the event that calls this
+  */
 function displaySymbol(event){
-  // flip card
   event.target.classList.add('open', 'show');
 }
 
-
+/**
+  * @description add card to openCards[], 2 cards / turn, compare 2nd card
+  * @param event - the event from the event that calls this
+  */
 function cardList(event){
-  // Add card to openCards[], 2 cards / turn, compare 2nd card
   if (openCards.length < 2) {
     openCards.push(event.target);
   }
@@ -115,34 +129,38 @@ function cardList(event){
   }
 }
 
-
+/**
+  * @description flip cards back and remove from openCards
+  */
 function clearCards (){
-  // flip cards back and remove from openCards
   openCards.forEach( function(card){
     card.classList.remove('open', 'show', 'nope');
   });
   openCards = [];
 }
 
-
+/**
+  * @description if cards match, lock openCards
+  */
 function cardsMatch(){
-  // If cards match, lock open
   openCards.forEach( function(card){ card.classList.add('match') });
   clearCards();
   matchCount++;
 }
 
-
+/**
+  * @description if no match, remove from list and flip after 1s
+  */
 function cardsDontMatch(){
-  // If no match, remove from list and flip after 1s
   openCards.forEach( function(card){ card.classList.add('nope') });
   setTimeout(clearCards, 1000);
   starMinus();
 }
 
-
+/**
+  * @description winGame() at 8 matches, stopTimer(), alert user, call newGame
+  */
 function winGame(){
-  // winGame() at 8 matches, stopTimer(), alert user, call newGame
   stopTimer();
   window.alert(`YOU WIN!!
 Your time was ${timeCount} seconds.
@@ -151,17 +169,19 @@ Play again?`);
   newGame();
 }
 
-
+/**
+  * @description loseGame() at 0 stars, stopTimer(), alert user, call newGame()
+  */
 function loseGame(){
-  // loseGame() at 0 stars, stopTimer(), alert user, call newGame()
   stopTimer();
   window.alert('you lose :(');
   newGame();
 }
 
-
+/**
+  * @description compare card class symbols
+  */
 function cardCompare(){
-  // compare card class symbols
   if (openCards[0].firstChild.className == openCards[1].firstChild.className){
     cardsMatch();
   } else {
@@ -178,9 +198,10 @@ function cardCompare(){
   }
 }
 
-
+/**
+  * @description Decrement stars on not match
+  */
 function starMinus(){
-  // Decrement stars on not match.
   switch (stars) {
     case 6:
     STARS[2].firstChild.classList.add('hide');
