@@ -94,6 +94,8 @@ function newGame() {
   // Start timeCount @ 0sec on 1st click
   timeCount = 0;
   DECK.addEventListener('click', startTimer);
+  // reset openCards[] to fix reset bug.
+  openCards = [];
 }
 
 
